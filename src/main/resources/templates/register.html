@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/register.js"></script>
+
+</head>
+<body>
+<div>
+    <button
+            type="button" onclick="window.location.href='login'">BackToLogin
+    </button>
+</div>
+<form>
+    <div>
+        <label>Email</label>
+        <div>
+            <input type="text" placeholder="Please input email" id="registerEmail">
+        </div>
+    </div>
+    <div>
+        <label>Password</label>
+        <div>
+            <input type="password" placeholder="Please input password" id="registerPassword">
+        </div>
+    </div>
+    <div>
+        <label>LastName</label>
+        <div>
+            <input type="text" placeholder="Please input last name" id="registerLN">
+        </div>
+    </div>
+    <div>
+        <label>FirstName</label>
+        <div>
+            <input type="text" placeholder="Please input first name" id="registerFN">
+        </div>
+    </div>
+    <div>
+        <label>Birth</label>
+        <div>
+            <input type="text" placeholder="Please input birth" id="registerBirth">
+        </div>
+    </div>
+    <div>
+        <button
+                type="button" onclick="register()">Register
+        </button>
+    </div>
+</form>
+</body>
+</html>

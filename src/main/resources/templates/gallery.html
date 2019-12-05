@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Gallery</title>
+
+    <script src="/js/jquery.js"></script>
+    <script src="/js/gallery.js"></script>
+    <script src="/js/login.js"></script>
+
+</head>
+<body>
+<button
+        type="button" onclick="logout()">logout
+</button>
+
+<h5>These are your uploaded images</h5>
+<ul th:each="image:${imagesList}">
+    <li><img th:src="${image.url}">
+        <a th:href="@{'/downloadImage?url=' + ${image.url}}">Download</a>
+    </li>
+</ul>
+
+<h5>You can upload file here</h5>
+<form enctype="multipart/form-data" id="uploadForm">
+    <input type="file" name="file" id="uploadFile">
+    <button
+            type="button" onclick="uploadImage()">upload
+    </button>
+</form>
+
+</body>
+</html>
