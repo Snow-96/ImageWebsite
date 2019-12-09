@@ -3,6 +3,7 @@ package com.csci430.website.controller;
 import com.csci430.website.entity.User;
 import com.csci430.website.repository.UserRepository;
 import com.csci430.website.vo.RegisterVO;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,7 +38,8 @@ public class RegisterController {
         } else {
             map.put("result", "success");
             map.put("message", "Register Success");
-            // todo hash password
+            String hashed = BCrypt.hashpw(registerVO.getPassword(), BCrypt.gensalt());
+            registerVO.setPassword(hashed);
             userRepository.save(new User(registerVO));
         }
         return map;

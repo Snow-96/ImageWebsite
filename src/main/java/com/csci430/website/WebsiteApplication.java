@@ -2,12 +2,20 @@ package com.csci430.website;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class WebsiteApplication {
+public class WebsiteApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         SpringApplication.run(WebsiteApplication.class, args);
+    }
+
+    @Override // for .jar
+    protected SpringApplicationBuilder configure(
+            SpringApplicationBuilder builder) {
+        return builder.sources(this.getClass());
     }
 
 }

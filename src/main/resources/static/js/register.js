@@ -1,12 +1,18 @@
 function register() {
     let registerEmail = $("#registerEmail").val();
     let registerPassword = $("#registerPassword").val();
+    let registerPasswordConfirm = $("#registerPasswordConfirm").val();
     let registerLN = $("#registerLN").val();
     let registerFN = $("#registerFN").val();
     let registerBirth = $("#registerBirth").val();
 
-    if (registerEmail === "" || registerPassword === "" || registerLN === "" || registerFN === "" || registerBirth === "") {
+    if (registerEmail === "" || registerPassword === "" || registerPasswordConfirm === "" || registerLN === "" || registerFN === "" || registerBirth === "") {
         alert("Please fill all these fields");
+        return;
+    }
+
+    if (registerPassword !== registerPasswordConfirm) {
+        alert("The confirm password confirmation does not match");
         return;
     }
 

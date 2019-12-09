@@ -4,11 +4,14 @@ import com.csci430.website.entity.User;
 import com.csci430.website.repository.UserRepository;
 import com.csci430.website.security.WebSecurityConfig;
 import com.csci430.website.vo.LoginVO;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.*;
 
 @Controller
@@ -21,8 +24,13 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String login(HttpSession session) {
-        return session.getAttribute(WebSecurityConfig.SESSION_KEY) != null ? "gallery" : "login";
+    public String login(HttpSession session, HttpServletResponse response) throws IOException {
+        if (session.getAttribute(WebSecurityConfig.SESSION_KEY) != null) {
+            response.sendRedirect("/gallery");
+            return null;
+        } else {
+            return "login";
+        }
     }
 
     @GetMapping("/logout")
@@ -40,8 +48,7 @@ public class LoginController {
     Map<String, String> loginPost(HttpSession session, @RequestBody LoginVO loginVO) {
         Map<String, String> map = new HashMap<>();
         User user = userRepository.findByEmail(loginVO.getEmail());
-        // todo hash password
-        if (user == null || !user.getPassword().equals(loginVO.getPassword())) {
+        if (user == null || !BCrypt.checkpw(loginVO.getPassword(), user.getPassword())) {
             map.put("result", "fail");
             map.put("message", "wrong password Or email");
             return map;
