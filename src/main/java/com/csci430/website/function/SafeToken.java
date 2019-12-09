@@ -3,7 +3,7 @@ package com.csci430.website.function;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-public class SateToken {
+public class SafeToken {
     public static String generateSafeToken(int length) {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[length];

@@ -1,7 +1,7 @@
 package com.csci430.website.controller;
 
 import com.csci430.website.entity.Image;
-import com.csci430.website.function.SateToken;
+import com.csci430.website.function.SafeToken;
 import com.csci430.website.repository.ImageRepository;
 import com.csci430.website.security.WebSecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +55,7 @@ public class GalleryController {
         String suffixName = fileName.substring(fileName.lastIndexOf("."));
         System.out.println("FileName: " + fileName);
         System.out.println("FilePath: " + imagesPath);
-        String safeToken = "PIC" + SateToken.generateSafeToken(20);
+        String safeToken = "PIC" + SafeToken.generateSafeToken(20);
         File dest = new File(imagesPath + safeToken + suffixName);
         if (!dest.getParentFile().exists()) {
             dest.getParentFile().mkdirs();

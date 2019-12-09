@@ -1,6 +1,7 @@
 package com.csci430.website.controller;
 
 import com.csci430.website.entity.User;
+import com.csci430.website.function.SlowHash;
 import com.csci430.website.repository.UserRepository;
 import com.csci430.website.vo.RegisterVO;
 import org.mindrot.jbcrypt.BCrypt;
@@ -38,7 +39,7 @@ public class RegisterController {
         } else {
             map.put("result", "success");
             map.put("message", "Register Success");
-            String hashed = BCrypt.hashpw(registerVO.getPassword(), BCrypt.gensalt());
+            String hashed = SlowHash.generateHashedString(registerVO.getPassword());
             registerVO.setPassword(hashed);
             userRepository.save(new User(registerVO));
         }

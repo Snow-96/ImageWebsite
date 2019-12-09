@@ -1,6 +1,7 @@
 package com.csci430.website.controller;
 
 import com.csci430.website.entity.User;
+import com.csci430.website.function.SlowHash;
 import com.csci430.website.repository.UserRepository;
 import com.csci430.website.security.WebSecurityConfig;
 import com.csci430.website.vo.LoginVO;
@@ -48,7 +49,7 @@ public class LoginController {
     Map<String, String> loginPost(HttpSession session, @RequestBody LoginVO loginVO) {
         Map<String, String> map = new HashMap<>();
         User user = userRepository.findByEmail(loginVO.getEmail());
-        if (user == null || !BCrypt.checkpw(loginVO.getPassword(), user.getPassword())) {
+        if (user == null || !SlowHash.verifyHashedString(loginVO.getPassword(), user.getPassword())) {
             map.put("result", "fail");
             map.put("message", "wrong password Or email");
             return map;
